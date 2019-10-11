@@ -23,7 +23,7 @@ ember install ember-data-cache-wip
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+Experimental cache for the new look ember-data
 
 
 Contributing
