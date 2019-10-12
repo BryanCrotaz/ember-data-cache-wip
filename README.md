@@ -27,7 +27,9 @@ Create a cache and use command and query objects to communicate with it.
 
 **LocalCache**
 
-A synchronous cache that stores objects in memory
+A synchronous cache that stores objects in memory. Objects are keyed by their id+type so polymorphic objects can be stored and retrieved.
+
+Objects can be unloaded to reduce the memory footprint.
 
 **FetchingCache**
 
