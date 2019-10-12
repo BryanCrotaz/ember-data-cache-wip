@@ -31,7 +31,7 @@ A synchronous cache that stores objects in memory
 
 **FetchingCache**
 
-Wraps a `LocalCache` to add fetching from a remote source when objects are not present in the cache. Fetching is implemented by callbacks, so the cache is backend-agnostic. Fetched objects are pushed to the cache automatically.
+An asynchronous cache that wraps a `LocalCache` to add fetching from a remote source when objects are not present in the cache. Fetching is implemented by callbacks, so the cache is backend-agnostic. Fetched objects are pushed to the cache automatically.
 
 Contributing
 ------------------------------------------------------------------------------
