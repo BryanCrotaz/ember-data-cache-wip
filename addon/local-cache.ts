@@ -1,4 +1,3 @@
-import { IJsonApiCache } from './interfaces';
 import { 
   JsonApiCacheCommand, 
   JsonApiCacheCommandType, 
@@ -16,7 +15,7 @@ import {
 } from './queries';
 import * as JsonApi from './ed-json-api';
 
-export class JsonApiCache implements IJsonApiCache {
+export class JsonApiLocalCache {
 
   private typesMap = new Map<string, Map<string, JsonApi.ExistingResourceObject>>();
 

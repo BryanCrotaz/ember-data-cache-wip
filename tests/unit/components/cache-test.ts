@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import { JsonApiCache } from 'ember-data-cache-wip/cache';
+import { JsonApiLocalCache } from 'ember-data-cache-wip/local-cache';
 import { 
   JsonApiCachePushCommand,
   JsonApiCacheUnloadOneCommand,
@@ -16,12 +16,12 @@ module('Unit | Component | cache', function(hooks) {
   setupTest(hooks);
 
   test('it constructs without error', function(assert) {
-    let cache = new JsonApiCache();
+    let cache = new JsonApiLocalCache();
     assert.ok(cache);
   });
 
   test('pushed object can be retrieved', function(assert) {
-    let cache = new JsonApiCache();
+    let cache = new JsonApiLocalCache();
     let push = new JsonApiCachePushCommand({
       data: {
         id: '123',
@@ -47,7 +47,7 @@ module('Unit | Component | cache', function(hooks) {
   });
 
   test('get object that is not present returns null', function(assert) {
-    let cache = new JsonApiCache();
+    let cache = new JsonApiLocalCache();
     let push = new JsonApiCachePushCommand({
       data: {
         id: '123',
@@ -65,7 +65,7 @@ module('Unit | Component | cache', function(hooks) {
   });
 
   test('get object whose type is not present returns null', function(assert) {
-    let cache = new JsonApiCache();
+    let cache = new JsonApiLocalCache();
     let push = new JsonApiCachePushCommand({
       data: {
         id: '123',
@@ -83,7 +83,7 @@ module('Unit | Component | cache', function(hooks) {
   });
 
   test('pushed object can be retrieved with getMany', function(assert) {
-    let cache = new JsonApiCache();
+    let cache = new JsonApiLocalCache();
     let push = new JsonApiCachePushCommand({
       data: {
         id: '123',
@@ -112,7 +112,7 @@ module('Unit | Component | cache', function(hooks) {
   });
 
   test('pushed object can be retrieved with getAllOfType', function(assert) {
-    let cache = new JsonApiCache();
+    let cache = new JsonApiLocalCache();
     let push = new JsonApiCachePushCommand({
       data: {
         id: '123',
@@ -140,7 +140,7 @@ module('Unit | Component | cache', function(hooks) {
   });
 
   test('getMany returns results and missing objects', function(assert) {
-    let cache = new JsonApiCache();
+    let cache = new JsonApiLocalCache();
     let push = new JsonApiCachePushCommand({
       data: {
         id: '123',
@@ -182,7 +182,7 @@ module('Unit | Component | cache', function(hooks) {
   });
 
   test('pushed object cannot be retrieved after unload one', function(assert) {
-    let cache = new JsonApiCache();
+    let cache = new JsonApiLocalCache();
     let push = new JsonApiCachePushCommand({
       data: {
         id: '123',
@@ -203,7 +203,7 @@ module('Unit | Component | cache', function(hooks) {
   });
 
   test('pushed object cannot be retrieved after unload many', function(assert) {
-    let cache = new JsonApiCache();
+    let cache = new JsonApiLocalCache();
     let push = new JsonApiCachePushCommand({
       data: {
         id: '123',
@@ -226,7 +226,7 @@ module('Unit | Component | cache', function(hooks) {
   });
 
   test('getAllOfType returns empty array when none of that type present', function(assert) {
-    let cache = new JsonApiCache();
+    let cache = new JsonApiLocalCache();
     let push = new JsonApiCachePushCommand({
       data: {
         id: '123',

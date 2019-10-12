@@ -1,9 +1,3 @@
-import { 
-  IJsonApiCacheGetOneQuery,
-  IJsonApiCacheGetManyQuery, 
-  IJsonApiCacheGetAllOfTypeQuery,
-  IJsonApiCacheGetRelationshipQuery
-} from "./interfaces";
 import * as JsonApi from './ed-json-api';
 
 export enum JsonApiCacheQueryType {
@@ -19,7 +13,7 @@ export type JsonApiCacheQuery =
   | JsonApiCacheGetAllOfTypeQuery
   | JsonApiCacheGetRelationshipQuery;
 
-export class JsonApiCacheGetOneQuery implements IJsonApiCacheGetOneQuery {
+export class JsonApiCacheGetOneQuery {
   public readonly queryType = JsonApiCacheQueryType.GetOne;
 
   constructor(
@@ -29,7 +23,7 @@ export class JsonApiCacheGetOneQuery implements IJsonApiCacheGetOneQuery {
   public result!: JsonApi.ExistingResourceObject | null;
 }
 
-export class JsonApiCacheGetManyQuery implements IJsonApiCacheGetManyQuery {
+export class JsonApiCacheGetManyQuery {
   public readonly queryType = JsonApiCacheQueryType.GetMany;
 
   constructor( 
@@ -40,7 +34,7 @@ export class JsonApiCacheGetManyQuery implements IJsonApiCacheGetManyQuery {
   public missing!: JsonApi.ExistingResourceIdentifierObject[]
 }
 
-export class JsonApiCacheGetAllOfTypeQuery implements IJsonApiCacheGetAllOfTypeQuery {
+export class JsonApiCacheGetAllOfTypeQuery {
   public readonly queryType = JsonApiCacheQueryType.GetAllOfType;
 
   constructor( public type: string ) {};
@@ -48,7 +42,7 @@ export class JsonApiCacheGetAllOfTypeQuery implements IJsonApiCacheGetAllOfTypeQ
   public result!: JsonApi.ExistingResourceObject[];
 }
 
-export class JsonApiCacheGetRelationshipQuery implements IJsonApiCacheGetRelationshipQuery {
+export class JsonApiCacheGetRelationshipQuery {
   public readonly queryType = JsonApiCacheQueryType.GetRelationship;
 
   constructor(
