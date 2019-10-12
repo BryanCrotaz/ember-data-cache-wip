@@ -8,7 +8,8 @@ import {
 } from 'ember-data-cache-wip/commands';
 import { 
   JsonApiCacheGetOneQuery, 
-  JsonApiCacheGetManyQuery 
+  JsonApiCacheGetManyQuery, 
+  JsonApiCacheGetAllOfTypeQuery
 } from 'ember-data-cache-wip/queries';
 
 module('Unit | Component | cache', function(hooks) {
@@ -110,6 +111,34 @@ module('Unit | Component | cache', function(hooks) {
     }
   });
 
+  test('pushed object can be retrieved with getAllOfType', function(assert) {
+    let cache = new JsonApiCache();
+    let push = new JsonApiCachePushCommand({
+      data: {
+        id: '123',
+        type: 'person',
+        attributes: {
+          name: 'Bryan'
+        }
+      }
+    });
+    cache.perform(push);
+
+    let get = new JsonApiCacheGetAllOfTypeQuery('person');
+    cache.query(get);
+    assert.ok(get.result);
+    assert.equal(get.result.length, 1);
+    let first = get.result[0];
+    if (first) {
+      assert.equal(first.id, '123');
+      assert.equal(first.type, 'person');
+      assert.ok(first.attributes);
+      if (first.attributes) {
+        assert.equal(first.attributes.name, 'Bryan');
+      }
+    }
+  });
+
   test('getMany returns results and missing objects', function(assert) {
     let cache = new JsonApiCache();
     let push = new JsonApiCachePushCommand({
@@ -194,6 +223,25 @@ module('Unit | Component | cache', function(hooks) {
     let get = new JsonApiCacheGetOneQuery({id: '123', type: 'person'});
     cache.query(get);
     assert.equal(get.result, null);
+  });
+
+  test('getAllOfType returns empty array when none of that type present', function(assert) {
+    let cache = new JsonApiCache();
+    let push = new JsonApiCachePushCommand({
+      data: {
+        id: '123',
+        type: 'person',
+        attributes: {
+          name: 'Bryan'
+        }
+      }
+    });
+    cache.perform(push);
+
+    let get = new JsonApiCacheGetAllOfTypeQuery('donkey');
+    cache.query(get);
+    assert.ok(get.result);
+    assert.equal(get.result.length, 0);
   });
 
 });

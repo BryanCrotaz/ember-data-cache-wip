@@ -72,7 +72,12 @@ export class JsonApiCache implements IJsonApiCache {
   }
   
   private queryGetAllOfType(query: JsonApiCacheGetAllOfTypeQuery): void {
-    throw new Error("Method not implemented.");
+    let typeCache = this.typesMap.get( query.type );
+    if (!typeCache) {
+      query.result = [];
+      return;
+    }
+    query.result = [...typeCache.values()];
   }
   
   private queryGetRelationship(query: JsonApiCacheGetRelationshipQuery): void {
