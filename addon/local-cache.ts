@@ -13,7 +13,7 @@ import {
   JsonApiCacheGetAllOfTypeQuery,
   JsonApiCacheGetRelationshipQuery
 } from './queries';
-import * as JsonApi from './ed-json-api';
+import * as JsonApi from './types/ed-json-api';
 
 export class JsonApiLocalCache {
 

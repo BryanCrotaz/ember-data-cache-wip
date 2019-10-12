@@ -1,4 +1,4 @@
-import * as JsonApi from './ed-json-api';
+import * as JsonApi from './types/ed-json-api';
 
 export enum JsonApiCacheQueryType {
   GetOne,

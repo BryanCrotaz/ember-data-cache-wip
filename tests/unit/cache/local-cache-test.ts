@@ -12,7 +12,7 @@ import {
   JsonApiCacheGetAllOfTypeQuery
 } from 'ember-data-cache-wip/queries';
 
-module('Unit | Component | cache', function(hooks) {
+module('Unit | local cache', function(hooks) {
   setupTest(hooks);
 
   test('it constructs without error', function(assert) {
