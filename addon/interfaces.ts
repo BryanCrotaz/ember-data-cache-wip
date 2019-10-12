@@ -1,63 +1,42 @@
-import * as JsonApi from 'jsonapi-typescript';
-import { XOR } from 'ts-xor';
-
-
-export type JsonApiCacheQuery = 
-  JsonApiCacheGetQuery
-  | JsonApiCacheGetAllOfTypeQuery
-  | JsonApiCacheGetRelationshipQuery;
-
-export type JsonApiCacheCommand = 
-  JsonApiCachePushCommand 
-  | JsonApiCacheUnloadCommand;
+import * as JsonApi from './ed-json-api';
+import { JsonApiCacheCommand } from './commands';
+import { JsonApiCacheQuery } from './queries';
 
 export interface IJsonApiCache {
   query(q: JsonApiCacheQuery): void;
   perform(p: JsonApiCacheCommand): void;
 }
 
-type Id = JsonApi.ResourceIdentifierObject;
-
-// push
-
-export interface JsonApiCachePushCommand {
-  document: JsonApi.Document;
-};
-
 // unload
-
-export type JsonApiCacheUnloadCommand = XOR<JsonApiCacheUnloadOneCommand, JsonApiCacheUnloadManyCommand>;
-
-export interface JsonApiCacheUnloadOneCommand {
-  identifier: Id;
+export interface IJsonApiCacheUnloadOneCommand {
+  identifier: JsonApi.ExistingResourceIdentifierObject;
 };
 
-export interface JsonApiCacheUnloadManyCommand {
-  identifiers: Id[];
+export interface IJsonApiCacheUnloadManyCommand {
+  identifiers: JsonApi.ExistingResourceIdentifierObject[];
 };
 
-// get object
-export type JsonApiCacheGetQuery = XOR<JsonApiCacheGetOneQuery,JsonApiCacheGetManyQuery>;
-
-export interface JsonApiCacheGetOneQuery {
-  identifier: Id;
-  result: JsonApi.ResourceObject;
+// Queries
+export interface IJsonApiCacheGetOneQuery {
+  identifier: JsonApi.ExistingResourceIdentifierObject;
+  result?: JsonApi.ExistingResourceObject | null;
 };
 
-export interface JsonApiCacheGetManyQuery {
-  identifiers: Id[];
-  result: JsonApi.ResourceObject[];
+export interface IJsonApiCacheGetManyQuery {
+  identifiers: JsonApi.ExistingResourceIdentifierObject[];
+  result: JsonApi.ExistingResourceObject[];
+  missing: JsonApi.ExistingResourceIdentifierObject[];
 };
 
 // get all of type
-export interface JsonApiCacheGetAllOfTypeQuery {
+export interface IJsonApiCacheGetAllOfTypeQuery {
   type: string;
-  result: JsonApi.ResourceObject[];
+  result?: JsonApi.ExistingResourceIdentifierObject[];
 };
 
 // get a relationship
-export interface JsonApiCacheGetRelationshipQuery {
-  identifier: Id;
+export interface IJsonApiCacheGetRelationshipQuery {
+  identifier: JsonApi.ExistingResourceIdentifierObject;
   name: string;
-  result: JsonApi.RelationshipObject;
+  result?: JsonApi.ExistingResourceIdentifierObject[] | null;
 };
